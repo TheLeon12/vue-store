@@ -10,10 +10,7 @@ import ProductPagination from '@/components/products/ProductPagination.vue'
 
 import { useProductsStore } from '@/stores/products.store'
 
-import type {
-  ProductSortField,
-  SortOrder,
-} from '@/types/api'
+import type { ProductSortField, SortOrder } from '@/types/api'
 
 const productsStore = useProductsStore()
 
@@ -50,10 +47,7 @@ function handleCategoryChange(category: string): void {
   void productsStore.setCategory(category)
 }
 
-function handleSortChange(
-  field: ProductSortField,
-  order: SortOrder,
-): void {
+function handleSortChange(field: ProductSortField, order: SortOrder): void {
   void productsStore.setSort(field, order)
 }
 

@@ -3,10 +3,7 @@ import CategoryFilter from '@/components/products/CategoryFilter.vue'
 import ProductSearch from '@/components/products/ProductSearch.vue'
 import ProductSort from '@/components/products/ProductSort.vue'
 
-import type {
-  ProductSortField,
-  SortOrder,
-} from '@/types/api'
+import type { ProductSortField, SortOrder } from '@/types/api'
 
 withDefaults(
   defineProps<{
@@ -65,9 +62,7 @@ const emit = defineEmits<{
         :sort-by="sortBy"
         :sort-order="sortOrder"
         :disabled="loading"
-        @change="
-          (field, order) => emit('sortChange', field, order)
-        "
+        @change="(field, order) => emit('sortChange', field, order)"
       />
     </div>
 

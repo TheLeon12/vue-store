@@ -12,14 +12,8 @@ import { useCartStore } from '@/stores/cart.store'
 const router = useRouter()
 const cartStore = useCartStore()
 
-const {
-  items,
-  isEmpty,
-  totalItems,
-  originalSubtotal,
-  totalDiscount,
-  total,
-} = storeToRefs(cartStore)
+const { items, isEmpty, totalItems, originalSubtotal, totalDiscount, total } =
+  storeToRefs(cartStore)
 
 const isClearDialogOpen = ref(false)
 
@@ -27,10 +21,7 @@ function handleUpdateQuantity(payload: {
   productId: number
   quantity: number
 }): void {
-  cartStore.updateQuantity(
-    payload.productId,
-    payload.quantity,
-  )
+  cartStore.updateQuantity(payload.productId, payload.quantity)
 }
 
 function openClearDialog(): void {
@@ -47,18 +38,18 @@ function confirmClearCart(): void {
 }
 
 function goToCheckout(): void {
-  /*
-   * La ruta se creará durante la fase del checkout.
-   * Mientras tanto evitamos navegar hacia una ruta inexistente.
-   */
-  console.info('Checkout pendiente de implementación')
+  if (cartStore.isEmpty) {
+    return
+  }
+
+  void router.push({
+    name: 'checkout',
+  })
 }
 </script>
 
 <template>
-  <section
-    class="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
-  >
+  <section class="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div
       class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
     >
@@ -75,10 +66,7 @@ function goToCheckout(): void {
           Carrito de compras
         </h1>
 
-        <p
-          v-if="!isEmpty"
-          class="mt-3 text-gray-600 dark:text-gray-300"
-        >
+        <p v-if="!isEmpty" class="mt-3 text-gray-600 dark:text-gray-300">
           {{ totalItems }}
           {{ totalItems === 1 ? 'producto' : 'productos' }}
           en tu carrito.
@@ -106,9 +94,7 @@ function goToCheckout(): void {
         🛒
       </div>
 
-      <h2
-        class="mt-5 text-xl font-bold text-gray-950 dark:text-white"
-      >
+      <h2 class="mt-5 text-xl font-bold text-gray-950 dark:text-white">
         Tu carrito está vacío
       </h2>
 
@@ -146,12 +132,12 @@ function goToCheckout(): void {
     </div>
 
     <BaseConfirmDialog
-  :open="isClearDialogOpen"
-  title="Vaciar carrito"
-  message="Se eliminarán todos los productos del carrito."
-  confirm-label="Vaciar carrito"
-  @confirm="confirmClearCart"
-  @cancel="closeClearDialog"
-/>
+      :open="isClearDialogOpen"
+      title="Vaciar carrito"
+      message="Se eliminarán todos los productos del carrito."
+      confirm-label="Vaciar carrito"
+      @confirm="confirmClearCart"
+      @cancel="closeClearDialog"
+    />
   </section>
 </template>

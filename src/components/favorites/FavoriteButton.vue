@@ -18,9 +18,7 @@ const emit = defineEmits<{
 }>()
 
 const accessibleLabel = computed(() => {
-  return props.active
-    ? 'Eliminar de favoritos'
-    : 'Agregar a favoritos'
+  return props.active ? 'Eliminar de favoritos' : 'Agregar a favoritos'
 })
 </script>
 

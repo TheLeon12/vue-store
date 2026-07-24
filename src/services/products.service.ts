@@ -17,12 +17,7 @@ interface ProductRequestParams {
 export async function getProducts(
   params: ProductQueryParams = {},
 ): Promise<ProductsResponse> {
-  const {
-    limit = 12,
-    skip = 0,
-    sortBy = '',
-    order = 'asc',
-  } = params
+  const { limit = 12, skip = 0, sortBy = '', order = 'asc' } = params
 
   const requestParams: ProductRequestParams = {
     limit,
@@ -45,12 +40,7 @@ export async function searchProducts(
   query: string,
   params: ProductQueryParams = {},
 ): Promise<ProductsResponse> {
-  const {
-    limit = 12,
-    skip = 0,
-    sortBy = '',
-    order = 'asc',
-  } = params
+  const { limit = 12, skip = 0, sortBy = '', order = 'asc' } = params
 
   const requestParams: ProductRequestParams & { q: string } = {
     q: query,
@@ -74,12 +64,7 @@ export async function getProductsByCategory(
   category: string,
   params: ProductQueryParams = {},
 ): Promise<ProductsResponse> {
-  const {
-    limit = 12,
-    skip = 0,
-    sortBy = '',
-    order = 'asc',
-  } = params
+  const { limit = 12, skip = 0, sortBy = '', order = 'asc' } = params
 
   const requestParams: ProductRequestParams = {
     limit,

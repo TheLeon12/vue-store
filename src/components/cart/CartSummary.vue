@@ -23,9 +23,7 @@ const emit = defineEmits<{
 
     <dl class="mt-6 space-y-4">
       <div class="flex items-center justify-between gap-4">
-        <dt class="text-gray-600 dark:text-gray-300">
-          Productos
-        </dt>
+        <dt class="text-gray-600 dark:text-gray-300">Productos</dt>
 
         <dd class="font-medium text-gray-950 dark:text-white">
           {{ totalItems }}
@@ -33,9 +31,7 @@ const emit = defineEmits<{
       </div>
 
       <div class="flex items-center justify-between gap-4">
-        <dt class="text-gray-600 dark:text-gray-300">
-          Subtotal
-        </dt>
+        <dt class="text-gray-600 dark:text-gray-300">Subtotal</dt>
 
         <dd class="font-medium text-gray-950 dark:text-white">
           {{ formatCurrency(originalSubtotal) }}
@@ -46,9 +42,7 @@ const emit = defineEmits<{
         v-if="totalDiscount > 0"
         class="flex items-center justify-between gap-4"
       >
-        <dt class="text-green-700 dark:text-green-400">
-          Descuentos
-        </dt>
+        <dt class="text-green-700 dark:text-green-400">Descuentos</dt>
 
         <dd class="font-medium text-green-700 dark:text-green-400">
           −{{ formatCurrency(totalDiscount) }}
@@ -58,9 +52,7 @@ const emit = defineEmits<{
       <div
         class="flex items-center justify-between gap-4 border-t border-gray-200 pt-4 dark:border-gray-800"
       >
-        <dt class="text-lg font-bold text-gray-950 dark:text-white">
-          Total
-        </dt>
+        <dt class="text-lg font-bold text-gray-950 dark:text-white">Total</dt>
 
         <dd class="text-2xl font-bold text-gray-950 dark:text-white">
           {{ formatCurrency(total) }}

@@ -46,11 +46,7 @@ function handleChange(event: Event): void {
         {{ loading ? 'Cargando categorías...' : 'Todas las categorías' }}
       </option>
 
-      <option
-        v-for="category in categories"
-        :key="category"
-        :value="category"
-      >
+      <option v-for="category in categories" :key="category" :value="category">
         {{ category }}
       </option>
     </select>

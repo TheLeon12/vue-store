@@ -31,10 +31,7 @@ function normalizeValue(value: number): number {
     return props.min
   }
 
-  return Math.min(
-    props.max,
-    Math.max(props.min, Math.trunc(value)),
-  )
+  return Math.min(props.max, Math.max(props.min, Math.trunc(value)))
 }
 
 function decrease(): void {
@@ -42,10 +39,7 @@ function decrease(): void {
     return
   }
 
-  emit(
-    'update:modelValue',
-    normalizeValue(props.modelValue - 1),
-  )
+  emit('update:modelValue', normalizeValue(props.modelValue - 1))
 }
 
 function increase(): void {
@@ -53,10 +47,7 @@ function increase(): void {
     return
   }
 
-  emit(
-    'update:modelValue',
-    normalizeValue(props.modelValue + 1),
-  )
+  emit('update:modelValue', normalizeValue(props.modelValue + 1))
 }
 
 function handleInput(event: Event): void {

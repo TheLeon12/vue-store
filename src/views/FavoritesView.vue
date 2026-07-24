@@ -10,11 +10,7 @@ import { useFavoritesStore } from '@/stores/favorites.store'
 
 const favoritesStore = useFavoritesStore()
 
-const {
-  products,
-  totalFavorites,
-  isEmpty,
-} = storeToRefs(favoritesStore)
+const { products, totalFavorites, isEmpty } = storeToRefs(favoritesStore)
 
 const isClearDialogOpen = ref(false)
 
@@ -33,9 +29,7 @@ function confirmClearFavorites(): void {
 </script>
 
 <template>
-  <section
-    class="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
-  >
+  <section class="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div
       class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
     >
@@ -52,15 +46,10 @@ function confirmClearFavorites(): void {
           Productos favoritos
         </h1>
 
-        <p
-          v-if="!isEmpty"
-          class="mt-3 text-gray-600 dark:text-gray-300"
-        >
+        <p v-if="!isEmpty" class="mt-3 text-gray-600 dark:text-gray-300">
           Tienes {{ totalFavorites }}
           {{
-            totalFavorites === 1
-              ? 'producto favorito'
-              : 'productos favoritos'
+            totalFavorites === 1 ? 'producto favorito' : 'productos favoritos'
           }}.
         </p>
       </div>
@@ -102,19 +91,15 @@ function confirmClearFavorites(): void {
       </RouterLink>
     </div>
 
-    <FavoritesGrid
-      v-else
-      class="mt-10"
-      :products="products"
-    />
+    <FavoritesGrid v-else class="mt-10" :products="products" />
 
-  <BaseConfirmDialog
-  :open="isClearDialogOpen"
-  title="Eliminar todos los favoritos"
-  message="Se eliminarán todos los productos guardados como favoritos."
-  confirm-label="Eliminar favoritos"
-  @confirm="confirmClearFavorites"
-  @cancel="closeClearDialog"
-/>
+    <BaseConfirmDialog
+      :open="isClearDialogOpen"
+      title="Eliminar todos los favoritos"
+      message="Se eliminarán todos los productos guardados como favoritos."
+      confirm-label="Eliminar favoritos"
+      @confirm="confirmClearFavorites"
+      @cancel="closeClearDialog"
+    />
   </section>
 </template>

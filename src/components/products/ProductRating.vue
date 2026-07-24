@@ -32,11 +32,7 @@ const stars = computed(() => {
         v-for="(filled, index) in stars"
         :key="index"
         class="text-lg"
-        :class="
-          filled
-            ? 'text-amber-500'
-            : 'text-gray-300 dark:text-gray-700'
-        "
+        :class="filled ? 'text-amber-500' : 'text-gray-300 dark:text-gray-700'"
       >
         ★
       </span>
@@ -50,8 +46,7 @@ const stars = computed(() => {
       v-if="reviewCount > 0"
       class="text-sm text-gray-500 dark:text-gray-400"
     >
-      ({{ reviewCount }}
-      {{ reviewCount === 1 ? 'reseña' : 'reseñas' }})
+      ({{ reviewCount }} {{ reviewCount === 1 ? 'reseña' : 'reseñas' }})
     </span>
   </div>
 </template>

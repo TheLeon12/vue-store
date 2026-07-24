@@ -8,5 +8,4 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
   <DefaultLayout>
     <RouterView />
   </DefaultLayout>
-  
 </template>

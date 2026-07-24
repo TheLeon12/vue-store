@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type {
-  ProductSortField,
-  SortOrder,
-} from '@/types/api'
+import type { ProductSortField, SortOrder } from '@/types/api'
 
 const props = withDefaults(
   defineProps<{
@@ -38,10 +35,7 @@ function handleChange(event: Event): void {
     return
   }
 
-  const [field, order] = value.split(':') as [
-    ProductSortField,
-    SortOrder,
-  ]
+  const [field, order] = value.split(':') as [ProductSortField, SortOrder]
 
   emit('change', field, order)
 }

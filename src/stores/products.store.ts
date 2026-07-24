@@ -9,11 +9,7 @@ import {
   searchProducts,
 } from '@/services/products.service'
 
-import type {
-  ApiError,
-  ProductSortField,
-  SortOrder,
-} from '@/types/api'
+import type { ApiError, ProductSortField, SortOrder } from '@/types/api'
 import type { Product } from '@/types/product'
 
 export const useProductsStore = defineStore('products', () => {
@@ -93,8 +89,7 @@ export const useProductsStore = defineStore('products', () => {
 
       products.value = []
       total.value = 0
-      error.value =
-        apiError.message || 'No fue posible cargar los productos'
+      error.value = apiError.message || 'No fue posible cargar los productos'
     } finally {
       isLoading.value = false
     }
@@ -112,35 +107,32 @@ export const useProductsStore = defineStore('products', () => {
     } catch (caughtError) {
       const apiError = caughtError as ApiError
 
-      error.value =
-        apiError.message || 'No fue posible cargar las categorías'
+      error.value = apiError.message || 'No fue posible cargar las categorías'
     } finally {
       isLoadingCategories.value = false
     }
   }
 
   async function fetchProductById(id: number): Promise<void> {
-  isLoading.value = true
-  error.value = null
-  selectedProduct.value = null
+    isLoading.value = true
+    error.value = null
+    selectedProduct.value = null
 
-  try {
-    selectedProduct.value = await getProductById(id)
-  } catch (caughtError) {
-    const apiError = caughtError as ApiError
+    try {
+      selectedProduct.value = await getProductById(id)
+    } catch (caughtError) {
+      const apiError = caughtError as ApiError
 
-    if (apiError.status === 404) {
-      error.value = 'El producto solicitado no existe.'
-      return
+      if (apiError.status === 404) {
+        error.value = 'El producto solicitado no existe.'
+        return
+      }
+
+      error.value = apiError.message || 'No fue posible cargar el producto.'
+    } finally {
+      isLoading.value = false
     }
-
-    error.value =
-      apiError.message ||
-      'No fue posible cargar el producto.'
-  } finally {
-    isLoading.value = false
   }
-}
 
   async function applyFilters(): Promise<void> {
     skip.value = 0
@@ -191,11 +183,7 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   async function goToPage(page: number): Promise<void> {
-    if (
-      page < 1 ||
-      page > totalPages.value ||
-      page === currentPage.value
-    ) {
+    if (page < 1 || page > totalPages.value || page === currentPage.value) {
       return
     }
 

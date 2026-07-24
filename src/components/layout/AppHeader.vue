@@ -13,7 +13,6 @@ const favoritesStore = useFavoritesStore()
 const { isDarkMode } = storeToRefs(appStore)
 const { totalItems } = storeToRefs(cartStore)
 const { totalFavorites } = storeToRefs(favoritesStore)
-
 </script>
 
 <template>
@@ -30,10 +29,7 @@ const { totalFavorites } = storeToRefs(favoritesStore)
         Vue Store
       </RouterLink>
 
-      <nav
-        class="flex items-center gap-5"
-        aria-label="Navegación principal"
-      >
+      <nav class="flex items-center gap-5" aria-label="Navegación principal">
         <RouterLink
           to="/"
           class="text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
@@ -48,35 +44,35 @@ const { totalFavorites } = storeToRefs(favoritesStore)
           Productos
         </RouterLink>
 
-       <RouterLink
-  to="/favorites"
-  class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
->
-  <span>Favoritos</span>
+        <RouterLink
+          to="/favorites"
+          class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+        >
+          <span>Favoritos</span>
 
-  <span
-    v-if="totalFavorites > 0"
-    class="inline-flex min-w-6 items-center justify-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs font-bold text-white"
-    :aria-label="`${totalFavorites} productos favoritos`"
-  >
-    {{ totalFavorites > 99 ? '99+' : totalFavorites }}
-  </span>
-</RouterLink>
+          <span
+            v-if="totalFavorites > 0"
+            class="inline-flex min-w-6 items-center justify-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs font-bold text-white"
+            :aria-label="`${totalFavorites} productos favoritos`"
+          >
+            {{ totalFavorites > 99 ? '99+' : totalFavorites }}
+          </span>
+        </RouterLink>
 
         <RouterLink
-  to="/cart"
-  class="relative inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
->
-  <span>Carrito</span>
+          to="/cart"
+          class="relative inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+        >
+          <span>Carrito</span>
 
-  <span
-    v-if="totalItems > 0"
-    class="inline-flex min-w-6 items-center justify-center rounded-full bg-indigo-600 px-1.5 py-0.5 text-xs font-bold text-white"
-    :aria-label="`${totalItems} productos en el carrito`"
-  >
-    {{ totalItems > 99 ? '99+' : totalItems }}
-  </span>
-</RouterLink>
+          <span
+            v-if="totalItems > 0"
+            class="inline-flex min-w-6 items-center justify-center rounded-full bg-indigo-600 px-1.5 py-0.5 text-xs font-bold text-white"
+            :aria-label="`${totalItems} productos en el carrito`"
+          >
+            {{ totalItems > 99 ? '99+' : totalItems }}
+          </span>
+        </RouterLink>
 
         <button
           type="button"

@@ -1,8 +1,4 @@
-import {
-  createRouter,
-  createWebHistory,
-  type RouteRecordRaw,
-} from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -30,13 +26,29 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-  path: '/cart',
-  name: 'cart',
-  component: () => import('@/views/CartView.vue'),
-  meta: {
-    title: 'Carrito',
+    path: '/cart',
+    name: 'cart',
+    component: () => import('@/views/CartView.vue'),
+    meta: {
+      title: 'Carrito',
+    },
   },
-},
+  {
+    path: '/checkout',
+    name: 'checkout',
+    component: () => import('@/views/CheckoutView.vue'),
+    meta: {
+      title: 'Checkout',
+    },
+  },
+  {
+    path: '/checkout/success',
+    name: 'checkout-success',
+    component: () => import('@/views/CheckoutSuccessView.vue'),
+    meta: {
+      title: 'Pedido completado',
+    },
+  },
   {
     path: '/favorites',
     name: 'favorites',

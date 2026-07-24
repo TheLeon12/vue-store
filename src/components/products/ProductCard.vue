@@ -29,10 +29,7 @@ function toggleFavorite(): void {
     class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
   >
     <div class="absolute right-3 top-3 z-10">
-      <FavoriteButton
-        :active="isFavorite"
-        @toggle="toggleFavorite"
-      />
+      <FavoriteButton :active="isFavorite" @toggle="toggleFavorite" />
     </div>
 
     <RouterLink

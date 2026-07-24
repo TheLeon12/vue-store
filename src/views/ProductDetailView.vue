@@ -15,11 +15,7 @@ import type { Product } from '@/types/product'
 const route = useRoute()
 const productsStore = useProductsStore()
 
-const {
-  selectedProduct,
-  isLoading,
-  error,
-} = storeToRefs(productsStore)
+const { selectedProduct, isLoading, error } = storeToRefs(productsStore)
 
 const productId = computed(() => {
   const rawId = Array.isArray(route.params.id)
@@ -30,10 +26,7 @@ const productId = computed(() => {
 })
 
 const isValidProductId = computed(() => {
-  return (
-    Number.isInteger(productId.value) &&
-    productId.value > 0
-  )
+  return Number.isInteger(productId.value) && productId.value > 0
 })
 
 watch(
@@ -41,10 +34,7 @@ watch(
   async (newProductId) => {
     productsStore.clearSelectedProduct()
 
-    if (
-      !Number.isInteger(newProductId) ||
-      newProductId <= 0
-    ) {
+    if (!Number.isInteger(newProductId) || newProductId <= 0) {
       return
     }
 
@@ -69,9 +59,7 @@ function handleAddToCart(payload: {
 </script>
 
 <template>
-  <section
-    class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8"
-  >
+  <section class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
     <RouterLink
       to="/products"
       class="inline-flex items-center text-sm font-semibold text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"

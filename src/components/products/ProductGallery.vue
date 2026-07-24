@@ -17,10 +17,7 @@ const selectedImageIndex = ref(0)
 const availableImages = computed(() => {
   const combinedImages = [...props.images]
 
-  if (
-    props.thumbnail &&
-    !combinedImages.includes(props.thumbnail)
-  ) {
+  if (props.thumbnail && !combinedImages.includes(props.thumbnail)) {
     combinedImages.unshift(props.thumbnail)
   }
 
@@ -28,10 +25,7 @@ const availableImages = computed(() => {
 })
 
 const selectedImage = computed(() => {
-  return (
-    availableImages.value[selectedImageIndex.value] ??
-    props.thumbnail
-  )
+  return availableImages.value[selectedImageIndex.value] ?? props.thumbnail
 })
 
 watch(
@@ -45,10 +39,7 @@ watch(
 )
 
 function selectImage(index: number): void {
-  if (
-    index < 0 ||
-    index >= availableImages.value.length
-  ) {
+  if (index < 0 || index >= availableImages.value.length) {
     return
   }
 

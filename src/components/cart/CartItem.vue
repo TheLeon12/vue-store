@@ -4,10 +4,7 @@ import { RouterLink } from 'vue-router'
 
 import QuantitySelector from '@/components/products/QuantitySelector.vue'
 
-import {
-  getCartItemSubtotal,
-  getCartItemUnitPrice,
-} from '@/utils/cart'
+import { getCartItemSubtotal, getCartItemUnitPrice } from '@/utils/cart'
 import { formatCurrency } from '@/utils/currency'
 
 import type { CartItem } from '@/types/cart'
@@ -107,9 +104,7 @@ function handleQuantityChange(quantity: number): void {
     </div>
 
     <div class="lg:min-w-32 lg:text-right">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        Subtotal
-      </p>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Subtotal</p>
 
       <p class="mt-1 text-xl font-bold text-gray-950 dark:text-white">
         {{ formatCurrency(subtotal) }}

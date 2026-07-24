@@ -8,19 +8,12 @@ import {
   calculateCartTotal,
 } from '@/utils/cart'
 
-import type {
-  AddToCartPayload,
-  CartItem,
-} from '@/types/cart'
+import type { AddToCartPayload, CartItem } from '@/types/cart'
 
 const CART_STORAGE_KEY = 'vue-store-cart'
 
 export const useCartStore = defineStore('cart', () => {
-  const items = useStorage<CartItem[]>(
-    CART_STORAGE_KEY,
-    [],
-    localStorage,
-  )
+  const items = useStorage<CartItem[]>(CART_STORAGE_KEY, [], localStorage)
 
   const isEmpty = computed(() => {
     return items.value.length === 0
@@ -58,10 +51,7 @@ export const useCartStore = defineStore('cart', () => {
     return findItem(productId)?.quantity ?? 0
   }
 
-  function normalizeQuantity(
-    quantity: number,
-    stock: number,
-  ): number {
+  function normalizeQuantity(quantity: number, stock: number): number {
     if (!Number.isFinite(quantity)) {
       return 1
     }
@@ -72,10 +62,7 @@ export const useCartStore = defineStore('cart', () => {
       return 0
     }
 
-    return Math.min(
-      normalizedStock,
-      Math.max(1, Math.trunc(quantity)),
-    )
+    return Math.min(normalizedStock, Math.max(1, Math.trunc(quantity)))
   }
 
   function addItem(payload: AddToCartPayload): boolean {
@@ -85,10 +72,7 @@ export const useCartStore = defineStore('cart', () => {
       return false
     }
 
-    const requestedQuantity = normalizeQuantity(
-      payload.quantity,
-      product.stock,
-    )
+    const requestedQuantity = normalizeQuantity(payload.quantity, product.stock)
 
     if (requestedQuantity === 0) {
       return false
@@ -116,20 +100,14 @@ export const useCartStore = defineStore('cart', () => {
     return true
   }
 
-  function updateQuantity(
-    productId: number,
-    quantity: number,
-  ): void {
+  function updateQuantity(productId: number, quantity: number): void {
     const item = findItem(productId)
 
     if (!item) {
       return
     }
 
-    item.quantity = normalizeQuantity(
-      quantity,
-      item.product.stock,
-    )
+    item.quantity = normalizeQuantity(quantity, item.product.stock)
   }
 
   function increaseQuantity(productId: number): void {
@@ -165,7 +143,6 @@ export const useCartStore = defineStore('cart', () => {
   function clearCart(): void {
     items.value = []
   }
-
 
   return {
     items,

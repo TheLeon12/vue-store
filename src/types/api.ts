@@ -5,12 +5,7 @@ export interface ApiError {
 
 export type SortOrder = 'asc' | 'desc'
 
-export type ProductSortField =
-  | ''
-  | 'title'
-  | 'price'
-  | 'rating'
-  | 'stock'
+export type ProductSortField = '' | 'title' | 'price' | 'rating' | 'stock'
 
 export interface PaginationParams {
   limit?: number

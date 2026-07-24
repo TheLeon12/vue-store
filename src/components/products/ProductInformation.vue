@@ -138,12 +138,12 @@ function addToCart(): void {
     </h1>
 
     <div class="mt-5">
-  <FavoriteButton
-    :active="isFavorite"
-    show-label
-    @toggle="toggleFavorite"
-  />
-</div>
+      <FavoriteButton
+        :active="isFavorite"
+        show-label
+        @toggle="toggleFavorite"
+      />
+    </div>
 
     <div class="mt-4">
       <ProductRating

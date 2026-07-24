@@ -47,9 +47,7 @@ function clearSearch(): void {
 
 <template>
   <div class="relative">
-    <label for="product-search" class="sr-only">
-      Buscar productos
-    </label>
+    <label for="product-search" class="sr-only"> Buscar productos </label>
 
     <input
       id="product-search"

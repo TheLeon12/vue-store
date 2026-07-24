@@ -1,19 +1,40 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
+import FavoriteButton from '@/components/favorites/FavoriteButton.vue'
+
+import { useFavoritesStore } from '@/stores/favorites.store'
 import { formatCurrency } from '@/utils/currency'
 
 import type { Product } from '@/types/product'
 
-defineProps<{
+const props = defineProps<{
   product: Product
 }>()
+
+const favoritesStore = useFavoritesStore()
+
+const isFavorite = computed(() => {
+  return favoritesStore.isFavorite(props.product.id)
+})
+
+function toggleFavorite(): void {
+  favoritesStore.toggleFavorite(props.product)
+}
 </script>
 
 <template>
   <article
-    class="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+    class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
   >
+    <div class="absolute right-3 top-3 z-10">
+      <FavoriteButton
+        :active="isFavorite"
+        @toggle="toggleFavorite"
+      />
+    </div>
+
     <RouterLink
       :to="{
         name: 'product-detail',
@@ -59,23 +80,6 @@ defineProps<{
 
         <span class="text-sm text-amber-600 dark:text-amber-400">
           ★ {{ product.rating.toFixed(1) }}
-        </span>
-      </div>
-
-      <div class="mt-3">
-        <span
-          class="inline-flex rounded-full px-2.5 py-1 text-xs font-medium"
-          :class="
-            product.stock > 10
-              ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
-              : 'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300'
-          "
-        >
-          {{
-            product.stock > 10
-              ? `${product.stock} disponibles`
-              : `Solo quedan ${product.stock}`
-          }}
         </span>
       </div>
 

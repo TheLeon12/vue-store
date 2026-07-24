@@ -4,11 +4,16 @@ import { RouterLink } from 'vue-router'
 
 import { useCartStore } from '@/stores/cart.store'
 import { useAppStore } from '@/stores/app.store'
+import { useFavoritesStore } from '@/stores/favorites.store'
 
 const appStore = useAppStore()
 const cartStore = useCartStore()
+const favoritesStore = useFavoritesStore()
+
 const { isDarkMode } = storeToRefs(appStore)
 const { totalItems } = storeToRefs(cartStore)
+const { totalFavorites } = storeToRefs(favoritesStore)
+
 </script>
 
 <template>
@@ -43,12 +48,20 @@ const { totalItems } = storeToRefs(cartStore)
           Productos
         </RouterLink>
 
-        <RouterLink
-          to="/favorites"
-          class="text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
-        >
-          Favoritos
-        </RouterLink>
+       <RouterLink
+  to="/favorites"
+  class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+>
+  <span>Favoritos</span>
+
+  <span
+    v-if="totalFavorites > 0"
+    class="inline-flex min-w-6 items-center justify-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs font-bold text-white"
+    :aria-label="`${totalFavorites} productos favoritos`"
+  >
+    {{ totalFavorites > 99 ? '99+' : totalFavorites }}
+  </span>
+</RouterLink>
 
         <RouterLink
   to="/cart"

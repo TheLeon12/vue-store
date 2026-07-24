@@ -4,6 +4,9 @@ import { computed, ref, watch } from 'vue'
 import ProductRating from '@/components/products/ProductRating.vue'
 import QuantitySelector from '@/components/products/QuantitySelector.vue'
 
+import FavoriteButton from '@/components/favorites/FavoriteButton.vue'
+import { useFavoritesStore } from '@/stores/favorites.store'
+
 import {
   calculateDiscountedPrice,
   formatCurrency,
@@ -68,6 +71,12 @@ const totalPrice = computed(() => {
   return roundCurrency(discountedPrice.value * quantity.value)
 })
 
+const favoritesStore = useFavoritesStore()
+
+const isFavorite = computed(() => {
+  return favoritesStore.isFavorite(props.product.id)
+})
+
 watch(
   () => props.product.id,
   () => {
@@ -78,6 +87,10 @@ watch(
     immediate: true,
   },
 )
+
+function toggleFavorite(): void {
+  favoritesStore.toggleFavorite(props.product)
+}
 
 function addToCart(): void {
   if (isOutOfStock.value) {
@@ -123,6 +136,14 @@ function addToCart(): void {
     >
       {{ product.title }}
     </h1>
+
+    <div class="mt-5">
+  <FavoriteButton
+    :active="isFavorite"
+    show-label
+    @toggle="toggleFavorite"
+  />
+</div>
 
     <div class="mt-4">
       <ProductRating

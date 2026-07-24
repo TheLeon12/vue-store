@@ -146,11 +146,12 @@ function goToCheckout(): void {
     </div>
 
     <BaseConfirmDialog
-      :open="isClearDialogOpen"
-      title="Vaciar carrito"
-      message="Se eliminarán todos los productos del carrito. Esta acción no se puede deshacer."
-      @confirm="confirmClearCart"
-      @cancel="closeClearDialog"
-    />
+  :open="isClearDialogOpen"
+  title="Vaciar carrito"
+  message="Se eliminarán todos los productos del carrito."
+  confirm-label="Vaciar carrito"
+  @confirm="confirmClearCart"
+  @cancel="closeClearDialog"
+/>
   </section>
 </template>

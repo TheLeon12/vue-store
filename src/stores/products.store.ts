@@ -120,21 +120,27 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   async function fetchProductById(id: number): Promise<void> {
-    isLoading.value = true
-    error.value = null
-    selectedProduct.value = null
+  isLoading.value = true
+  error.value = null
+  selectedProduct.value = null
 
-    try {
-      selectedProduct.value = await getProductById(id)
-    } catch (caughtError) {
-      const apiError = caughtError as ApiError
+  try {
+    selectedProduct.value = await getProductById(id)
+  } catch (caughtError) {
+    const apiError = caughtError as ApiError
 
-      error.value =
-        apiError.message || 'No fue posible cargar el producto'
-    } finally {
-      isLoading.value = false
+    if (apiError.status === 404) {
+      error.value = 'El producto solicitado no existe.'
+      return
     }
+
+    error.value =
+      apiError.message ||
+      'No fue posible cargar el producto.'
+  } finally {
+    isLoading.value = false
   }
+}
 
   async function applyFilters(): Promise<void> {
     skip.value = 0

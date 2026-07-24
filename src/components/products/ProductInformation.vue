@@ -51,14 +51,9 @@ const maximumQuantity = computed(() => {
     return 1
   }
 
-  const minimumOrderQuantity =
-    props.product.minimumOrderQuantity ?? 1
+  const minimumOrderQuantity = props.product.minimumOrderQuantity ?? 1
 
-  return Math.max(
-    1,
-    props.product.stock,
-    minimumOrderQuantity,
-  )
+  return Math.max(1, props.product.stock, minimumOrderQuantity)
 })
 
 const minimumQuantity = computed(() => {
@@ -66,16 +61,11 @@ const minimumQuantity = computed(() => {
     return 1
   }
 
-  return Math.min(
-    props.product.minimumOrderQuantity ?? 1,
-    props.product.stock,
-  )
+  return Math.min(props.product.minimumOrderQuantity ?? 1, props.product.stock)
 })
 
 const totalPrice = computed(() => {
-  return roundCurrency(
-    discountedPrice.value * quantity.value,
-  )
+  return roundCurrency(discountedPrice.value * quantity.value)
 })
 
 watch(
@@ -123,10 +113,7 @@ function addToCart(): void {
         {{ product.brand }}
       </span>
 
-      <span
-        v-if="product.sku"
-        class="text-sm text-gray-500 dark:text-gray-400"
-      >
+      <span v-if="product.sku" class="text-sm text-gray-500 dark:text-gray-400">
         SKU: {{ product.sku }}
       </span>
     </div>
@@ -144,16 +131,12 @@ function addToCart(): void {
       />
     </div>
 
-    <p
-      class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300"
-    >
+    <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
       {{ product.description }}
     </p>
 
     <div class="mt-7 flex flex-wrap items-end gap-3">
-      <span
-        class="text-3xl font-bold text-gray-950 dark:text-white"
-      >
+      <span class="text-3xl font-bold text-gray-950 dark:text-white">
         {{ formatCurrency(discountedPrice) }}
       </span>
 
@@ -192,17 +175,13 @@ function addToCart(): void {
               : 'text-green-700 dark:text-green-300'
         "
       >
-        <template v-if="isOutOfStock">
-          Producto agotado
-        </template>
+        <template v-if="isOutOfStock"> Producto agotado </template>
 
         <template v-else-if="product.stock <= 10">
           Solo quedan {{ product.stock }} unidades
         </template>
 
-        <template v-else>
-          Disponible: {{ product.stock }} unidades
-        </template>
+        <template v-else> Disponible: {{ product.stock }} unidades </template>
       </p>
 
       <p
@@ -247,7 +226,7 @@ function addToCart(): void {
       role="status"
       aria-live="polite"
     >
-      El producto está preparado para agregarse al carrito.
+      Producto agregado correctamente al carrito.
     </p>
 
     <dl
@@ -257,13 +236,9 @@ function addToCart(): void {
         v-if="product.shippingInformation"
         class="grid gap-1 px-4 py-4 sm:grid-cols-3"
       >
-        <dt class="font-medium text-gray-900 dark:text-white">
-          Envío
-        </dt>
+        <dt class="font-medium text-gray-900 dark:text-white">Envío</dt>
 
-        <dd
-          class="text-gray-600 dark:text-gray-300 sm:col-span-2"
-        >
+        <dd class="text-gray-600 dark:text-gray-300 sm:col-span-2">
           {{ product.shippingInformation }}
         </dd>
       </div>
@@ -272,13 +247,9 @@ function addToCart(): void {
         v-if="product.warrantyInformation"
         class="grid gap-1 px-4 py-4 sm:grid-cols-3"
       >
-        <dt class="font-medium text-gray-900 dark:text-white">
-          Garantía
-        </dt>
+        <dt class="font-medium text-gray-900 dark:text-white">Garantía</dt>
 
-        <dd
-          class="text-gray-600 dark:text-gray-300 sm:col-span-2"
-        >
+        <dd class="text-gray-600 dark:text-gray-300 sm:col-span-2">
           {{ product.warrantyInformation }}
         </dd>
       </div>
@@ -287,28 +258,17 @@ function addToCart(): void {
         v-if="product.returnPolicy"
         class="grid gap-1 px-4 py-4 sm:grid-cols-3"
       >
-        <dt class="font-medium text-gray-900 dark:text-white">
-          Devolución
-        </dt>
+        <dt class="font-medium text-gray-900 dark:text-white">Devolución</dt>
 
-        <dd
-          class="text-gray-600 dark:text-gray-300 sm:col-span-2"
-        >
+        <dd class="text-gray-600 dark:text-gray-300 sm:col-span-2">
           {{ product.returnPolicy }}
         </dd>
       </div>
 
-      <div
-        v-if="product.weight"
-        class="grid gap-1 px-4 py-4 sm:grid-cols-3"
-      >
-        <dt class="font-medium text-gray-900 dark:text-white">
-          Peso
-        </dt>
+      <div v-if="product.weight" class="grid gap-1 px-4 py-4 sm:grid-cols-3">
+        <dt class="font-medium text-gray-900 dark:text-white">Peso</dt>
 
-        <dd
-          class="text-gray-600 dark:text-gray-300 sm:col-span-2"
-        >
+        <dd class="text-gray-600 dark:text-gray-300 sm:col-span-2">
           {{ product.weight }}
         </dd>
       </div>

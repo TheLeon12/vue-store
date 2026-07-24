@@ -30,13 +30,13 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/cart',
-    name: 'cart',
-    component: () => import('@/views/CartView.vue'),
-    meta: {
-      title: 'Carrito',
-    },
+  path: '/cart',
+  name: 'cart',
+  component: () => import('@/views/CartView.vue'),
+  meta: {
+    title: 'Carrito',
   },
+},
   {
     path: '/favorites',
     name: 'favorites',

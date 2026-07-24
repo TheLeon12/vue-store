@@ -4,27 +4,62 @@ import { storeToRefs } from 'pinia'
 
 import BaseLoader from '@/components/base/BaseLoader.vue'
 import BaseMessage from '@/components/base/BaseMessage.vue'
+import ProductFilters from '@/components/products/ProductFilters.vue'
 import ProductGrid from '@/components/products/ProductGrid.vue'
 import ProductPagination from '@/components/products/ProductPagination.vue'
 
 import { useProductsStore } from '@/stores/products.store'
 
+import type {
+  ProductSortField,
+  SortOrder,
+} from '@/types/api'
+
 const productsStore = useProductsStore()
 
 const {
   products,
+  categories,
   total,
+  searchTerm,
+  selectedCategory,
+  sortBy,
+  sortOrder,
   isLoading,
+  isLoadingCategories,
   error,
   currentPage,
   totalPages,
+  hasActiveFilters,
 } = storeToRefs(productsStore)
 
 onMounted(() => {
-  if (products.value.length === 0) {
-    void productsStore.fetchProducts()
-  }
+  void Promise.all([
+    productsStore.fetchCategories(),
+    products.value.length === 0
+      ? productsStore.fetchProducts()
+      : Promise.resolve(),
+  ])
 })
+
+function handleSearch(value: string): void {
+  void productsStore.setSearchTerm(value)
+}
+
+function handleCategoryChange(category: string): void {
+  void productsStore.setCategory(category)
+}
+
+function handleSortChange(
+  field: ProductSortField,
+  order: SortOrder,
+): void {
+  void productsStore.setSort(field, order)
+}
+
+function handleReset(): void {
+  void productsStore.resetFilters()
+}
 </script>
 
 <template>
@@ -46,7 +81,7 @@ onMounted(() => {
         </h1>
 
         <p class="mt-3 text-gray-600 dark:text-gray-300">
-          Explora los productos disponibles en nuestra tienda.
+          Busca, filtra y ordena los productos disponibles.
         </p>
       </div>
 
@@ -54,9 +89,25 @@ onMounted(() => {
         v-if="!isLoading && !error"
         class="text-sm text-gray-500 dark:text-gray-400"
       >
-        {{ total }} productos encontrados
+        {{ total }}
+        {{ total === 1 ? 'producto encontrado' : 'productos encontrados' }}
       </p>
     </div>
+
+    <ProductFilters
+      :search-term="searchTerm"
+      :selected-category="selectedCategory"
+      :categories="categories"
+      :sort-by="sortBy"
+      :sort-order="sortOrder"
+      :loading="isLoading"
+      :loading-categories="isLoadingCategories"
+      :has-active-filters="hasActiveFilters"
+      @search="handleSearch"
+      @category-change="handleCategoryChange"
+      @sort-change="handleSortChange"
+      @reset="handleReset"
+    />
 
     <BaseLoader
       v-if="isLoading && products.length === 0"
@@ -80,9 +131,18 @@ onMounted(() => {
 
     <BaseMessage
       v-else-if="products.length === 0"
-      title="No hay productos"
-      message="No encontramos productos disponibles."
-    />
+      title="No encontramos productos"
+      message="Prueba con otro término o elimina los filtros activos."
+    >
+      <button
+        v-if="hasActiveFilters"
+        type="button"
+        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
+        @click="handleReset"
+      >
+        Limpiar filtros
+      </button>
+    </BaseMessage>
 
     <template v-else>
       <div
@@ -90,7 +150,7 @@ onMounted(() => {
         class="mb-6 rounded-lg bg-indigo-50 px-4 py-3 text-sm text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
         role="status"
       >
-        Cargando la siguiente página...
+        Actualizando productos...
       </div>
 
       <ProductGrid :products="products" />

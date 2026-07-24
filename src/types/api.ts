@@ -3,12 +3,23 @@ export interface ApiError {
   status?: number
 }
 
+export type SortOrder = 'asc' | 'desc'
+
+export type ProductSortField =
+  | ''
+  | 'title'
+  | 'price'
+  | 'rating'
+  | 'stock'
+
 export interface PaginationParams {
   limit?: number
   skip?: number
 }
 
 export interface ProductQueryParams extends PaginationParams {
-  sortBy?: string
-  order?: 'asc' | 'desc'
+  search?: string
+  category?: string
+  sortBy?: ProductSortField
+  order?: SortOrder
 }

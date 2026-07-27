@@ -161,6 +161,7 @@ Estructura del proyecto
 
 src/
 ├── assets/
+<<<<<<< HEAD
 │ ├── main.css
 │ └── product-placeholder.svg
 ├── components/
@@ -171,6 +172,18 @@ src/
 │ ├── forms/
 │ ├── layout/
 │ └── products/
+=======
+│   ├── main.css
+│   └── product-placeholder.svg
+├── components/
+│   ├── base/
+│   ├── cart/
+│   ├── checkout/
+│   ├── favorites/
+│   ├── forms/
+│   ├── layout/
+│   └── products/
+>>>>>>> b42b4d13616ab7adfc4022460fac39d25e7f376d
 ├── constants/
 ├── layouts/
 ├── router/

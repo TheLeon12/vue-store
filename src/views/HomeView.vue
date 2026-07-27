@@ -99,8 +99,7 @@ async function loadFeaturedProducts(): Promise<void> {
 
     featuredProducts.value = response.products
   } catch {
-    productsError.value =
-      'No fue posible cargar los productos destacados.'
+    productsError.value = 'No fue posible cargar los productos destacados.'
   } finally {
     isLoadingProducts.value = false
   }
@@ -145,9 +144,8 @@ onMounted(() => {
           <p
             class="mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300"
           >
-            Explora nuestro catálogo, guarda tus productos favoritos y
-            disfruta de una experiencia de compra rápida, moderna y
-            sencilla.
+            Explora nuestro catálogo, guarda tus productos favoritos y disfruta
+            de una experiencia de compra rápida, moderna y sencilla.
           </p>
 
           <div class="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -172,9 +170,7 @@ onMounted(() => {
             class="mt-10 grid grid-cols-2 gap-4 border-t border-gray-200 pt-8 dark:border-gray-800 sm:grid-cols-4"
           >
             <div>
-              <dt
-                class="text-2xl font-bold text-gray-950 dark:text-white"
-              >
+              <dt class="text-2xl font-bold text-gray-950 dark:text-white">
                 100+
               </dt>
 
@@ -184,9 +180,7 @@ onMounted(() => {
             </div>
 
             <div>
-              <dt
-                class="text-2xl font-bold text-gray-950 dark:text-white"
-              >
+              <dt class="text-2xl font-bold text-gray-950 dark:text-white">
                 20+
               </dt>
 
@@ -196,9 +190,7 @@ onMounted(() => {
             </div>
 
             <div>
-              <dt
-                class="text-2xl font-bold text-gray-950 dark:text-white"
-              >
+              <dt class="text-2xl font-bold text-gray-950 dark:text-white">
                 24/7
               </dt>
 
@@ -208,9 +200,7 @@ onMounted(() => {
             </div>
 
             <div>
-              <dt
-                class="text-2xl font-bold text-gray-950 dark:text-white"
-              >
+              <dt class="text-2xl font-bold text-gray-950 dark:text-white">
                 100%
               </dt>
 
@@ -284,9 +274,7 @@ onMounted(() => {
                   Explorar
                 </h3>
 
-                <p
-                  class="mt-1 text-sm text-gray-500 dark:text-gray-400"
-                >
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                   Busca y filtra productos.
                 </p>
               </RouterLink>
@@ -308,9 +296,7 @@ onMounted(() => {
                   Favoritos
                 </h3>
 
-                <p
-                  class="mt-1 text-sm text-gray-500 dark:text-gray-400"
-                >
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                   Guarda lo que te gusta.
                 </p>
               </RouterLink>
@@ -370,14 +356,11 @@ onMounted(() => {
           </h2>
 
           <p class="mt-4 text-gray-600 dark:text-gray-300">
-            Explora algunas de las categorías disponibles en nuestro
-            catálogo.
+            Explora algunas de las categorías disponibles en nuestro catálogo.
           </p>
         </div>
 
-        <div
-          class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <RouterLink
             v-for="category in categories"
             :key="category.slug"
@@ -526,9 +509,7 @@ onMounted(() => {
     <!-- Beneficios -->
     <section class="bg-gray-50 py-16 dark:bg-gray-900/40 sm:py-20">
       <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div
-          class="grid gap-6 md:grid-cols-3"
-        >
+        <div class="grid gap-6 md:grid-cols-3">
           <article
             v-for="benefit in benefits"
             :key="benefit.title"
@@ -541,15 +522,11 @@ onMounted(() => {
               {{ benefit.icon }}
             </span>
 
-            <h2
-              class="mt-5 text-xl font-bold text-gray-950 dark:text-white"
-            >
+            <h2 class="mt-5 text-xl font-bold text-gray-950 dark:text-white">
               {{ benefit.title }}
             </h2>
 
-            <p
-              class="mt-3 leading-7 text-gray-600 dark:text-gray-300"
-            >
+            <p class="mt-3 leading-7 text-gray-600 dark:text-gray-300">
               {{ benefit.description }}
             </p>
           </article>
@@ -580,8 +557,8 @@ onMounted(() => {
             </h2>
 
             <p class="mt-4 text-lg text-indigo-100">
-              Visita el catálogo completo, utiliza nuestros filtros y
-              guarda tus productos favoritos.
+              Visita el catálogo completo, utiliza nuestros filtros y guarda tus
+              productos favoritos.
             </p>
           </div>
 
